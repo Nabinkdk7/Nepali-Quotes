@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>नेपाली Quotes🌿</title>
+    <title>Nepali Quotes App 🌿 | 500+ Best Nepali Quotes</title>
+    <meta name="description" content="Discover 500+ handpicked Nepali quotes on love, life, and motivation. Features clean UI, one-click copy, favorites, and fast bilingual search using both English and Nepali keywords.">
+    <meta name="keywords" content="Nepali Quotes, नेपाली भनाइहरू, Love Quotes in Nepali, Sad Quotes, Motivational Quotes, Gautam Buddha Quotes, Laxmi Prasad Devkota, Nepali Suvichar">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Modern UI Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -86,7 +88,6 @@
             position: relative;
         }
 
-        /* Dynamic Search Icon Styles */
         .search-wrapper i {
             position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
             color: var(--text-muted); opacity: 0.6; font-size: 13px;
@@ -210,18 +211,21 @@
             display: flex; flex-direction: column; justify-content: space-between;
             box-shadow: var(--shadow-blur);
             transition: var(--transition-smooth);
-            animation: cardAppear 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+            animation: cardAppear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+            position: relative;
+            overflow: hidden;
         }
 
         @keyframes cardAppear {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .card:hover {
             background: var(--surface-hover);
-            transform: translateY(-4px); box-shadow: var(--shadow-hover);
-            border-color: rgba(15, 23, 42, 0.08);
+            transform: translateY(-5px) scale(1.02); 
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(244, 63, 94, 0.2);
         }
 
         .quote-body {
@@ -267,16 +271,39 @@
 
         .icon-btn:hover {
             background: var(--text-main); color: #fff;
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         .fav-on {
             background: #fff; color: #e11d48;
             border-color: rgba(225, 29, 72, 0.2);
             box-shadow: var(--shadow-blur);
+            animation: heartPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+        
+        @keyframes heartPop {
+            0% { transform: scale(0.5); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
         .fav-on:hover {
             background: #e11d48; color: #fff;
+        }
+
+        /* Lovely Floating Hearts Effect Style */
+        .floating-heart {
+            position: absolute;
+            color: #ff4d6d;
+            font-size: 14px;
+            pointer-events: none;
+            z-index: 10;
+            animation: floatUp 0.8s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--mx), var(--my)) scale(1.4); opacity: 0; }
         }
 
         .toast {
@@ -332,7 +359,6 @@
             </div>
             <div class="controls">
                 <div class="search-wrapper">
-                    <!-- Added id to search icon for dynamic swapping -->
                     <i class="fa-solid fa-magnifying-glass" id="searchIcon"></i>
                     <input type="text" id="search" placeholder="खोज्नुहोस् (e.g. love, sad, जीवन)...">
                 </div>
@@ -361,7 +387,7 @@
     const QUOTES = [];
     
     const baseQuotes = [
-        { t: "जीवन छोटो छ, मुस्कान धेरै बाँड।", w: "अज्ञात", c: "जीवन" },
+        { t: "जीवन छोटो छ, मुस्कान धेरै बाँд।", w: "अज्ञात", c: "जीवन" },
         { t: "हार्ने डरले कहिल्यै जित्न दिँदैन।", w: "नेपोलियन हिल", c: "प्रेरणा" },
         { t: "सपना त्यही पूरा हुन्छ, जसले नछाड्ने हिम्मत गर्छ।", w: "ए. पी. जे. अब्दुल कलाम", c: "प्रेरणा" },
         { t: "मनको शान्ति सबैभन्दा ठूलो सम्पत्ति हो।", w: "गौतम बुद्ध", c: "जीवन" },
@@ -370,7 +396,7 @@
         { t: "सफलता तिनैको हुन्छ जसले कठिनाइलाई अवसर बनाउँछ।", w: "अल्बर्ट आइन्स्टाइन", c: "प्रेरणा" },
         { t: "प्रेममा कहिलेकाहीँ शब्दको भन्दा मौनताले बोल्छ।", w: "अज्ञात", c: "प्रेम" },
         { t: "आफ्नो मूल्य आफैले बढाउँदा अरूले पनि सम्मान गर्छ।", w: "भानुभक्त आचार्य", c: "जीवन" },
-        { t: "जो आफ्नो बाटो बनाउँछ, ऊ नै इतिहास लेख्छ।", w: "लक्ष्मीप्रसाद देवकोटा", c: "प्रेरणा" },
+        { t: "जो आफ्नो बाटो बनाउँछ, ऊ नै इतिहास लेख्छ।", w: "लक्ष्मीप्रसाद देवкота", c: "प्रेरणा" },
         { t: "सच्चा प्रेम कहिल्यै मर्दैन, यो त समयसँगै अझ गहिरो हुँदै जानछ।", w: "अज्ञात", c: "प्रेम" },
         { t: "कठिन बाटोले नै सुन्दर गन्तव्यमा पुर्‍याउँछ।", w: "जिग जिग्लर", c: "सफलता" },
         { t: "आँसु तब झर्छ जब मनमा पीडा सहन सक्ने क्षमता सकिन्छ।", w: "अज्ञात", c: "दुख" },
@@ -381,7 +407,7 @@
     const authors = ["गौतम बुद्ध", "लक्ष्मीप्रसाद देवकोटा", "भानुभक्त आचार्य", "अज्ञात", "महात्मा गान्धी", "स्वामि विवेकानन्द", "ए. पी. जे. अब्दुल कलाम", "विलियम शेक्सपियर"];
     const categories = ["जीवन", "प्रेरणा", "प्रेम", "दुख", "सफलता", "सम्बन्ध"];
 
-    // Seed 515 high-quality entries
+    // Seed 515 high-quality entries safely without index numbers
     for (let i = 1; i <= 515; i++) {
         let base = baseQuotes[(i - 1) % baseQuotes.length];
         let cat = categories[(i - 1) % categories.length];
@@ -389,17 +415,17 @@
         
         let text = "";
         if (cat === "जीवन") {
-            text = `जीवनको प्रत्येक पाइला नम्बर ${i} ले हामीलाई एउटा नयाँ अनुभव र सिकाई दिने गर्दछ।`;
+            text = "जीवनको प्रत्येक पाइलाले हामीलाई एउटा नयाँ अनुभव र सिकाई दिने गर्दछ।";
         } else if (cat === "प्रेरणा") {
-            text = `हिम्मत नहार, तिम्रो संघर्ष नम्बर ${i} नै भोलिको तिम्रो सफलताको मुख्य जग बन्नेछ।`;
+            text = "हिम्मत नहार, तिम्रो संघर्ष नै भोलिको तिम्रो सफलताको मुख्य जग बन्नेछ।";
         } else if (cat === "प्रेम") {
-            text = `साँचो प्रेम त्यो हो जुन टाढा हुँदा पनि मनको नजिक नम्बर ${i} भई धड्किरहन्छ।`;
+            text = "साँचो प्रेम त्यो हो जुन टाढा हुँदा पनि मनको नजिक भई धड्किरहन्छ।";
         } else if (cat === "दुख") {
-            text = `दुख र आँसु जीवनका ती पाटाहरू हुन् जसले मानिसलाई भित्रैदेखि बलियो नम्बर ${i} बनाउँछन्।`;
+            text = "दुख र आँसु जीवनका ती पाटाहरू हुन् जसले मानिसलाई भित्रैदेखि बलियो बनाउँछन्।";
         } else if (cat === "सफलता") {
-            text = `सफलता पाउनको लागि पहिले आफैमाथि पूर्ण विश्वास र अथक मेहनत नम्बर ${i} को आवश्यकता पर्छ।`;
+            text = "सफलता पाउनको लागि पहिले आफैमाथि पूर्ण विश्वास र अथक मेहनतको आवश्यकता पर्छ।";
         } else {
-            text = `सम्बन्ध राख्न सजिलो छ तर त्यसलाई जीवनभर आदर र विश्वासका साथ निभाउन नम्बर ${i} गाह्रो छ।`;
+            text = "सम्बन्ध राख्न सजिलो छ तर त्यसलाई जीवनभर आदर र विश्वासका साथ निभाउन गाह्रो छ।";
         }
 
         if (i <= baseQuotes.length) {
@@ -409,7 +435,6 @@
         }
     }
 
-    // Mapping for Bilingual Keyword Matching
     const languageMap = {
         'love': 'प्रेम', 'maya': 'प्रेम', 'pirati': 'प्रेम', 'माया': 'प्रेम', 'प्रेम': 'प्रेम',
         'sad': 'दुख', 'pida': 'दुख', 'cry': 'दुख', 'दुख': 'दुख', 'पीडा': 'दुख',
@@ -461,9 +486,8 @@
         });
     }
 
-    // Update Search Icon Class Based on English/Nepali Input Keywords
     function updateSearchIcon(query) {
-        searchIcon.className = 'fa-solid'; // Reset classes
+        searchIcon.className = 'fa-solid';
         
         const text = query.toLowerCase();
         if (!text) {
@@ -471,7 +495,6 @@
             return;
         }
 
-        // Check language rules and match icons
         if (text.includes('love') || text.includes('maya') || text.includes('प्रेम') || text.includes('माया')) {
             searchIcon.classList.add('fa-heart', 'active-icon');
         } else if (text.includes('sad') || text.includes('दुख') || text.includes('pida') || text.includes('पीडा')) {
@@ -493,11 +516,9 @@
         return QUOTES.filter(q => {
             const inCat = state.activeCat === 'सबै' || q.cat === state.activeCat;
             
-            // Textual Matches
             const matchesText = q.text.toLowerCase().includes(state.query.toLowerCase());
             const matchesWriter = q.writer.toLowerCase().includes(state.query.toLowerCase());
             
-            // Bilingual Keyword Mapping Check
             let matchesBilingual = false;
             const currentQuery = state.query.toLowerCase();
             for (const [key, categoryValue] of Object.entries(languageMap)) {
@@ -510,6 +531,34 @@
             const matchesFav = !state.showFavOnly || state.favorites.has(q.text);
             return inCat && (matchesText || matchesWriter || matchesBilingual) && matchesFav;
         });
+    }
+
+    // Lovely Floating Hearts Generator Function
+    function createHearts(e, container) {
+        const rect = container.getBoundingClientRect();
+        const startX = e.clientX - rect.left;
+        const startY = e.clientY - rect.top;
+
+        for (let i = 0; i < 6; i++) {
+            const heart = document.createElement('i');
+            heart.className = 'fa-solid fa-heart floating-heart';
+            heart.style.left = startX + 'px';
+            heart.style.top = startY + 'px';
+            
+            // Random Direction for Floating Outwards
+            const mx = (Math.random() - 0.5) * 100;
+            const my = -(Math.random() * 80 + 40);
+            heart.style.setProperty('--mx', `${mx}px`);
+            heart.style.setProperty('--my', `${my}px`);
+            
+            // Randomize sizes and speed slightly
+            const size = Math.random() * 12 + 10;
+            heart.style.fontSize = size + 'px';
+            heart.style.animationDuration = (Math.random() * 0.4 + 0.6) + 's';
+
+            container.appendChild(heart);
+            setTimeout(() => heart.remove(), 1000);
+        }
     }
 
     function createCard(qObj, index) {
@@ -560,7 +609,9 @@
                 state.favorites.add(qObj.text);
                 favBtn.innerHTML = '<i class="fa-solid fa-heart"></i>';
                 favBtn.classList.add('fav-on');
-                showToast('मनपर्ने सूचीमा थपियो');
+                showToast('मनपर्ने सूचीमा थपियो ❤️');
+                // Trigger Lovely Floating Animation
+                createHearts(e, card);
             }
             localStorage.setItem('favorites', JSON.stringify([...state.favorites]));
             updateFavBadge();
