@@ -248,6 +248,44 @@
             padding: 0 18px 80px;
         }
 
+        .page-head {
+            margin: 12px 0 18px;
+            text-align: left;
+        }
+
+        .page-title {
+            margin: 0;
+            font-size: clamp(2rem, 4vw, 3.4rem);
+            line-height: 1.08;
+            letter-spacing: -0.06em;
+            font-weight: 800;
+            color: var(--text-main);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.4rem 0.8rem;
+        }
+
+        .page-title .en {
+            font-size: clamp(0.72rem, 1.7vw, 1.05rem);
+            letter-spacing: 0;
+            font-weight: 600;
+            color: var(--text-muted);
+            opacity: 0.9;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .section-label {
+            margin: 0 0 14px;
+            font-size: 0.92rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            opacity: 0.8;
+            font-weight: 700;
+        }
+
         .cats {
             display: flex;
             gap: 8px;
@@ -504,12 +542,33 @@
         }
 
         @media (max-width: 768px) {
-            .header-container { flex-direction: column; align-items: stretch; gap: 12px; }
-            .controls { justify-content: space-between; width: 100%; }
-            .search-wrapper { flex: 1; }
+            .header-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+            .controls {
+                justify-content: space-between;
+                width: 100%;
+            }
+            .search-wrapper {
+                flex: 1;
+            }
             .controls input[type=text] { width: 100%; }
             .controls input[type=text]:focus { width: 100%; }
             main { margin: 20px auto; }
+            .page-head {
+                text-align: center;
+            }
+            .page-title {
+                justify-content: center;
+                gap: 0.2rem 0.5rem;
+            }
+            .page-title .en {
+                display: block;
+                white-space: normal;
+                width: 100%;
+            }
             .grid { gap: 12px; }
         }
     </style>
@@ -544,153 +603,7 @@
         </div>
         <h2 class="section-label">सुविचारहरू · Quotes</h2>
         <div class="cats" id="categories"></div>
-        <div class="grid" id="grid">
-            <article class="card">
-                <h3 class="quote" lang="ne">मन सबैथोक हो । जसरी तिमी सोच्छौँ, त्यस्तै बन्छौँ ।</h3>
-                <p class="quote-en" lang="en">The mind is everything. What you think, you become.</p>
-                <p class="writer">गौतम बुद्ध</p>
-                <div class="meta">
-                    <div class="tag">जीवन</div>
-                    <div class="actions">
-                        <button class="icon-btn" aria-pressed="false" aria-label="मनपर्ने सूची"><i class="fa-regular fa-heart"></i></button>
-                        <button class="icon-btn" aria-label="प्रतिलिपि बनाउनुहोस्"><i class="fa-regular fa-copy"></i></button>
-                    </div>
-                </div>
-            </article>
-            <article class="card">
-                <h3 class="quote" lang="ne">स्वास्थ्य सबैभन्दा ठूलो उपहार हो, सन्तोष सबैभन्दा ठूलो धन हो ।</h3>
-                <p class="quote-en" lang="en">Health is the greatest gift; contentment, the greatest wealth.</p>
-                <p class="writer">गौतम बुद्ध</p>
-                <div class="meta">
-                    <div class="tag">जीवन</div>
-                    <div class="actions">
-                        <button class="icon-btn" aria-pressed="false" aria-label="मनपर्ने सूची"><i class="fa-regular fa-heart"></i></button>
-                        <button class="icon-btn" aria-label="प्रतिलिपि बनाउनुहोस्"><i class="fa-regular fa-copy"></i></button>
-                    </div>
-                </div>
-            </article>
-            <article class="card">
-                <h3 class="quote" lang="ne">तीन चीज धेरै समयसम्म लुक्दैनन् — सूर्य, चन्द्रमा र सत्य ।</h3>
-                <p class="quote-en" lang="en">Three things cannot stay hidden for long — the sun, the moon, and the truth.</p>
-                <p class="writer">गौतम बुद्ध</p>
-                <div class="meta">
-                    <div class="tag">प्रेरणा</div>
-                    <div class="actions">
-                        <button class="icon-btn" aria-pressed="false" aria-label="मनपर्ने सूची"><i class="fa-regular fa-heart"></i></button>
-                        <button class="icon-btn" aria-label="प्रतिलिपि बनाउनुहोस्"><i class="fa-regular fa-copy"></i></button>
-                    </div>
-                </div>
-            </article>
-            <article class="card">
-                <h3 class="quote" lang="ne">आफैलाई जित्नु अरूलाई जित्नुभन्दा ठूलो काम हो ।</h3>
-                <p class="quote-en" lang="en">Conquering yourself is a greater victory than conquering others.</p>
-                <p class="writer">गौतम बुद्ध</p>
-                <div class="meta">
-                    <div class="tag">प्रेरणा</div>
-                    <div class="actions">
-                        <button class="icon-btn" aria-pressed="false" aria-label="मनपर्ने सूची"><i class="fa-regular fa-heart"></i></button>
-                        <button class="icon-btn" aria-label="प्रतिलिपि बनाउनुहोस्"><i class="fa-regular fa-copy"></i></button>
-                    </div>
-                </div>
-            </article>
-            <article class="card">
-                <h3 class="quote" lang="ne">सबैभन्दा अध्यारो रात अज्ञानता हो ।</h3>
-                <p class="quote-en" lang="en">Ignorance is the darkest of all nights.</p>
-                <p class="writer">गौतम बुद्ध</p>
-                <div class="meta">
-                    <div class="tag">प्रेरणा</div>
-                    <div class="actions">
-                        <button class="icon-btn" aria-pressed="false" aria-label="मनपर्ने सूची"><i class="fa-regular fa-heart"></i></button>
-                        <button class="icon-btn" aria-label="प्रतिलिपि बनाउनुहोस्"><i class="fa-regular fa-copy"></i></button>
-                    </div>
-                </div>
-            </article>
-            <article class="card">
-                <h3 class="quote" lang="ne">हरेक कुरामा सोधबुझ गर र आफ्नै प्रकाश खोज ।</h3>
-                <p class="quote-en" lang="en">Question everything, and seek your own light.</p>
-                <p class="writer">गौतम बुद्ध</p>
-                <div class="meta">
-                    <div class="tag">जीवन</div>
-                    <div class="actions">
-                        <button class="icon-btn" aria-pressed="false" aria-label="मनपर्ने सूची"><i class="fa-regular fa-heart"></i></button>
-                        <button class="icon-btn" aria-label="प्रतिलिपि बनाउनुहोस्"><i class="fa-regular fa-copy"></i></button>
-                    </div>
-                </div>
-            </article>
-            <article class="card">
-                <h3 class="quote" lang="ne">तिमी आफ्नो रिसको कारणले होइन, रिसैले दण्डित हुन्छौ ।</h3>
-                <p class="quote-en" lang="en">You are not punished for your anger — you are punished by it.</p>
-                <p class="writer">गौतम बुद्ध</p>
-                <div class="meta">
-                    <div class="tag">सम्बन्ध</div>
-                    <div class="actions">
-                        <button class="icon-btn" aria-pressed="false" aria-label="मनपर्ने सूची"><i class="fa-regular fa-heart"></i></button>
-                        <button class="icon-btn" aria-label="प्रतिलिपि बनाउनुहोस्"><i class="fa-regular fa-copy"></i></button>
-                    </div>
-                </div>
-            </article>
-            <article class="card">
-                <h3 class="quote" lang="ne">रिस पाल्नु भनेको विष पिउनुजस्तै हो ।</h3>
-                <p class="quote-en" lang="en">Holding onto anger is like drinking poison.</p>
-                <p class="writer">गौतम बुद्ध</p>
-                <div class="meta">
-                    <div class="tag">सम्बन्ध</div>
-                    <div class="actions">
-                        <button class="icon-btn" aria-pressed="false" aria-label="मनपर्ने सूची"><i class="fa-regular fa-heart"></i></button>
-                        <button class="icon-btn" aria-label="प्रतिलिपि बनाउनुहोस्"><i class="fa-regular fa-copy"></i></button>
-                    </div>
-                </div>
-            </article>
-            <article class="card">
-                <h3 class="quote" lang="ne">आफू मिटाई अरूलाई दिनु, जहाँ छ ।</h3>
-                <p class="quote-en" lang="en">Give of yourself to others, wherever you are.</p>
-                <p class="writer">लक्ष्मीप्रसाद देवकोटा</p>
-                <div class="meta">
-                    <div class="tag">जीवन</div>
-                    <div class="actions">
-                        <button class="icon-btn" aria-pressed="false" aria-label="मनपर्ने सूची"><i class="fa-regular fa-heart"></i></button>
-                        <button class="icon-btn" aria-label="प्रतिलिपि बनाउनुहोस्"><i class="fa-regular fa-copy"></i></button>
-                    </div>
-                </div>
-            </article>
-            <article class="card">
-                <h3 class="quote" lang="ne">सपना त्यसैको पूरा हुन्छ, जसले सपना नछोड्ने हिम्मत गर्छ ।</h3>
-                <p class="quote-en" lang="en">Dreams come true for those who have the courage to hold on to them.</p>
-                <p class="writer">ए. पी. जे. अब्दुल कलाम</p>
-                <div class="meta">
-                    <div class="tag">प्रेरणा</div>
-                    <div class="actions">
-                        <button class="icon-btn" aria-pressed="false" aria-label="मनपर्ने सूची"><i class="fa-regular fa-heart"></i></button>
-                        <button class="icon-btn" aria-label="प्रतिलिपि बनाउनुहोस्"><i class="fa-regular fa-copy"></i></button>
-                    </div>
-                </div>
-            </article>
-            <article class="card">
-                <h3 class="quote" lang="ne">जीवन छोटो छ, मुस्कान धेरै ।</h3>
-                <p class="quote-en" lang="en">Life is short; smile more.</p>
-                <p class="writer">अज्ञात</p>
-                <div class="meta">
-                    <div class="tag">जीवन</div>
-                    <div class="actions">
-                        <button class="icon-btn" aria-pressed="false" aria-label="मनपर्ने सूची"><i class="fa-regular fa-heart"></i></button>
-                        <button class="icon-btn" aria-label="प्रतिलिपि बनाउनुहोस्"><i class="fa-regular fa-copy"></i></button>
-                    </div>
-                </div>
-            </article>
-            <article class="card">
-                <h3 class="quote" lang="ne">हार्ने डरले कहिल्यै जित्न सकिँदैन ।</h3>
-                <p class="quote-en" lang="en">The fear of losing will never let you win.</p>
-                <p class="writer">अज्ञात</p>
-                <div class="meta">
-                    <div class="tag">प्रेरणा</div>
-                    <div class="actions">
-                        <button class="icon-btn" aria-pressed="false" aria-label="मनपर्ने सूची"><i class="fa-regular fa-heart"></i></button>
-                        <button class="icon-btn" aria-label="प्रतिलिपि बनाउनुहोस्"><i class="fa-regular fa-copy"></i></button>
-                    </div>
-                </div>
-            </article>
-        </div>
-
+        <div class="grid" id="grid"> </div>
         <div class="load-more-wrap">
             <button id="loadMoreBtn" class="chip"><i class="fa-solid fa-angles-down"></i> थप सुविचारहरू</button>
         </div>
@@ -721,7 +634,14 @@
             { t: "सच्चा प्रेम कहिल्यै मर्दैन — यो समयसँगै अझ गहिरो हुँदै जान्छ ।", en: "True love never dies — it only grows deeper with time.", w: "अज्ञात", c: "प्रेम" },
             { t: "कठिन बाटोले नै सुन्दर गन्तव्यसम्म पुर्‍याउँछ ।", en: "The hard road is the one that leads to a beautiful destination.", w: "अज्ञात", c: "प्रेरणा" },
             { t: "आँसु तब झर्छ, जब मनले पीडा सहन छोड्छ ।", en: "Tears fall when the heart can no longer carry the pain.", w: "अज्ञात", c: "दुख" },
-            { t: "सम्बन्ध विश्वासमा टिक्छ, शंकामा होइन ।", en: "Relationships survive on trust, not suspicion.", w: "अज्ञात", c: "सम्बन्ध" }
+            { t: "सम्बन्ध विश्वासमा टिक्छ, शंकामा होइन ।", en: "Relationships survive on trust, not suspicion.", w: "अज्ञात", c: "सम्बन्ध" },
+            { t: "परिश्रम नै सफलताको एकमात्र साँचो बाटो हो ।", en: "Hard work is the true path to success.", w: "अज्ञात", c: "सफलता" },
+            { t: "जीवनको प्रत्येक पाइलाले हामीलाई नयाँ अनुभव र सिकाइ दिन्छ ।", en: "Every step in life gives us a new experience and lesson.", w: "अज्ञात", c: "जीवन" },
+            { t: "हार नमान — तिम्रो संघर्ष नै भोलिको सफलताको मुख्य जग बन्नेछ ।", en: "Do not give up — your struggle will become the foundation of tomorrow's success.", w: "अज्ञात", c: "सफलता" },
+            { t: "साँचो प्रेम त्यो हो, जुन टाढा हुँदा पनि मनभित्रै धड्किरहन्छ ।", en: "True love is the kind that keeps beating inside even from afar.", w: "अज्ञात", c: "प्रेम" },
+            { t: "दुख र आँसुले नै मानिसलाई भित्रभित्रै बलियो बनाउँछन् ।", en: "Pain and tears are what make a person stronger from within.", w: "अज्ञात", c: "दुख" },
+            { t: "सफलताका लागि पहिले आफैमाथि पूर्ण विश्वास र अथक मेहनत चाहिन्छ ।", en: "To succeed, first you need complete faith in yourself and relentless effort.", w: "अज्ञात", c: "सफलता" },
+            { t: "सम्बन्ध बनाउन सजिलो छ, तर आदर र विश्वासका साथ जीवनभर निभाउन गाह्रो छ ।", en: "It is easy to build a relationship, but hard to keep it alive with respect and trust.", w: "अज्ञात", c: "सम्बन्ध" }
         ];
 
         const BATCH = 12;
@@ -1008,8 +928,7 @@
         loadMoreBtn.addEventListener('click', loadMore);
 
         document.getElementById('randomBtn').addEventListener('click', () => {
-            const idx = Math.floor(Math.random() * QUOTES.length);
-            showToast('"' + QUOTES[idx].t + '" — ' + QUOTES[idx].w);
+            const idx = Math.floor(Math.random() * QUOTES.length);\n            showToast('"' + QUOTES[idx].t + '" — ' + QUOTES[idx].w);
         });
 
         document.getElementById('clearFav').addEventListener('click', () => {
