@@ -1,960 +1,662 @@
 <!DOCTYPE html>
 <html lang="ne">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nepali Quotes App 🌿 | Nepali Quotes with English Translations</title>
-    <meta name="description" content="Handpicked Nepali quotes with clear English translations on love, life, and motivation. Clean, fast, mobile-friendly reader with one-click copy, favorites, and bilingual search.">
-    <meta name="keywords" content="Nepali Quotes, नेपाली भनाइहरू, Love Quotes in Nepali, Sad Quotes, Motivational Quotes, Gautam Buddha Quotes, Laxmi Prasad Devkota, Nepal Suvichar, bilingual quotes">
-    <meta name="theme-color" content="#10b981">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://nepaliquotes.vercel.app/">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>नेपाली Quotes</title>
+  <meta name="description" content="Nepali quotes with English meanings and search." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg: #edf2f0;
+      --surface: rgba(255,255,255,0.55);
+      --header-bg: rgba(255,255,255,0.86);
+      --card: rgba(255,255,255,0.7);
+      --line: rgba(15,23,42,0.1);
+      --line-strong: rgba(15,23,42,0.18);
+      --text: #1d2b39;
+      --muted: rgba(29,43,57,0.7);
+      --green: #0fae87;
+      --green-strong: #0f9a7d;
+      --shadow: 0 10px 30px rgba(15,23,42,0.08);
+      --radius: 22px;
+      --radius-pill: 999px;
+      --content-width: 1380px;
+    }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Plus Jakarta Sans', 'Mukta', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
 
-    <style>
-        :root {
-            --bg-main: #f8fafc;
-            --surface-card: rgba(255, 255, 255, 0.85);
-            --surface-hover: #ffffff;
-            --border-subtle: rgba(15, 23, 42, 0.05);
-            --border-focus: #22c55e;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --primary-gradient: linear-gradient(135deg, #10b981, #059669);
-            --fav-gradient: linear-gradient(135deg, #f43f5e, #e11d48);
-            --shadow-blur: 0 10px 30px -10px rgba(15, 23, 42, 0.08);
-            --shadow-hover: 0 20px 40px -15px rgba(15, 23, 42, 0.12);
-            --radius-lg: 20px;
-            --radius-md: 14px;
-            --radius-pill: 999px;
-            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+    body, button, input {
+      font-family: inherit;
+    }
 
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    a { color: inherit; text-decoration: none; }
 
-        html { scroll-behavior: smooth; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
 
-        body {
-            font-family: 'Plus Jakarta Sans', 'Mukta', sans-serif;
-            background-color: var(--bg-main);
-            background-image: radial-gradient(at 0% 0%, rgba(240, 253, 244, 0.8) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(240, 249, 255, 0.8) 0px, transparent 50%);
-            background-attachment: fixed;
-            color: var(--text-main);
-            min-height: 100vh;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
+    .topbar-inner {
+      width: min(var(--content-width), calc(100% - 28px));
+      margin: 0 auto;
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
 
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-subtle);
-            padding: 14px 24px;
-            transition: var(--transition-smooth);
-        }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      user-select: none;
+    }
 
-        .header-container {
-            max-width: 1220px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #1cbf9a, #0d8a6d);
+      display: grid;
+      place-items: center;
+      color: white;
+      box-shadow: 0 8px 18px rgba(15,174,135,0.25);
+      font-size: 20px;
+      flex-shrink: 0;
+    }
 
-        header .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            font-size: 20px;
-            color: var(--text-main);
-            letter-spacing: -0.03em;
-            cursor: pointer;
-            user-select: none;
-        }
+    .brand-name {
+      font-size: clamp(2rem, 2vw, 2.4rem);
+      line-height: 1;
+      letter-spacing: -0.06em;
+      font-weight: 800;
+      font-family: 'Mukta', sans-serif;
+      color: var(--text);
+      white-space: nowrap;
+    }
 
-        header .logo .logo-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: var(--radius-md);
-            background: var(--primary-gradient);
-            display: grid;
-            place-items: center;
-            color: white;
-            font-size: 14px;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
-        }
+    .brand-name .eng {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
 
-        .controls {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
 
-        .search-wrapper {
-            position: relative;
-        }
+    .search-box {
+      position: relative;
+      width: min(360px, 48vw);
+      min-width: 210px;
+    }
 
-        .search-wrapper i {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            opacity: 0.6;
-            font-size: 13px;
-            transition: var(--transition-smooth);
-        }
+    .search-box i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 14px;
+    }
 
-        .search-wrapper i.active-icon {
-            color: #ef4444;
-            opacity: 1;
-            font-size: 15px;
-            animation: heartBeat 0.3s ease-in-out;
-        }
+    .search-box input {
+      width: 100%;
+      height: 48px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--line-strong);
+      background: rgba(255,255,255,0.55);
+      color: var(--text);
+      font-size: 14px;
+      padding: 0 16px 0 42px;
+      outline: none;
+      transition: all 0.25s ease;
+    }
 
-        .search-wrapper i.success-icon { color: #10b981; opacity: 1; font-size: 15px; }
-        .search-wrapper i.sad-icon { color: #3b82f6; opacity: 1; font-size: 15px; }
-        .search-wrapper i.life-icon { color: #8b5cf6; opacity: 1; font-size: 15px; }
+    .search-box input:focus {
+      border-color: rgba(15,174,135,0.5);
+      box-shadow: 0 0 0 4px rgba(15,174,135,0.08);
+      background: rgba(255,255,255,0.82);
+    }
 
-        @keyframes heartBeat {
-            0% { transform: translateY(-50%) scale(1); }
-            50% { transform: translateY(-50%) scale(1.3); }
-            100% { transform: translateY(-50%) scale(1); }
-        }
+    .btn {
+      border: 1px solid var(--line-strong);
+      background: rgba(255,255,255,0.78);
+      color: var(--text);
+      border-radius: var(--radius-pill);
+      height: 48px;
+      padding: 0 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 0 rgba(0,0,0,0.02);
+    }
 
-        .controls input[type=text] {
-            padding: 9px 14px 9px 38px;
-            border-radius: var(--radius-pill);
-            border: 1px solid rgba(15, 23, 42, 0.08);
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--text-main);
-            font-family: inherit;
-            font-size: 14px;
-            outline: none;
-            width: 200px;
-            transition: var(--transition-smooth);
-        }
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
 
-        .controls input[type=text]:focus {
-            background: #fff;
-            border-color: var(--border-focus);
-            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.1), var(--shadow-blur);
-            width: 240px;
-        }
+    .btn-primary {
+      background: linear-gradient(135deg, #1cbf9a, #0d8a6d);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 10px 18px rgba(15,174,135,0.25);
+    }
 
-        .controls button {
-            padding: 9px 16px;
-            border-radius: var(--radius-pill);
-            background: #fff;
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-            border: 1px solid rgba(15, 23, 42, 0.06);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+    .btn-icon {
+      width: 48px;
+      padding: 0;
+      border-radius: 50%;
+      position: relative;
+      overflow: visible;
+    }
 
-        .controls button:hover {
-            background: var(--text-main);
-            color: #fff;
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-blur);
-        }
+    .btn-icon .badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      border-radius: 50%;
+      background: #1d2b39;
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 10px;
+      font-weight: 700;
+      border: 2px solid #fff;
+    }
 
-        .controls #randomBtn {
-            background: var(--primary-gradient);
-            color: white;
-            border: none;
-        }
+    .page {
+      width: min(var(--content-width), calc(100% - 28px));
+      margin: 0 auto;
+      padding: 26px 0 60px;
+      min-height: calc(100vh - 82px);
+    }
 
-        .controls #randomBtn:hover {
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
-            transform: translateY(-1px);
-        }
+    .hero {
+      padding: 28px 0 24px;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
-        .fav-hub-btn {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            border: 1px solid rgba(15, 23, 42, 0.06);
-            background: #fff;
-            color: #ef4444;
-            font-size: 14px;
-            cursor: pointer;
-            position: relative;
-            display: grid;
-            place-items: center;
-            transition: var(--transition-smooth);
-        }
+    .hero-title {
+      margin: 0;
+      font-family: 'Mukta', sans-serif;
+      font-size: clamp(4rem, 6vw, 8rem);
+      line-height: 0.9;
+      letter-spacing: -0.085em;
+      font-weight: 800;
+      color: var(--text);
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.1em 0.3em;
+    }
 
-        .fav-hub-btn:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow-blur);
-        }
+    .hero-title .subtitle {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(0.9rem, 1.6vw, 1.5rem);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      color: var(--muted);
+      white-space: nowrap;
+    }
 
-        .fav-hub-btn.active-mode {
-            background: var(--fav-gradient);
-            color: white;
-            border-color: transparent;
-            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3);
-        }
+    .section-label {
+      margin: 12px 0 40px;
+      font-size: clamp(1rem, 1.3vw, 1.3rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(29,43,57,0.8);
+      font-weight: 700;
+      display: inline-block;
+    }
 
-        .fav-badge {
-            position: absolute;
-            top: -4px;
-            right: -4px;
-            background: var(--text-main);
-            color: white;
-            font-size: 9px;
-            font-weight: 700;
-            min-width: 18px;
-            height: 18px;
-            padding: 0 4px;
-            border-radius: var(--radius-pill);
-            display: grid;
-            place-items: center;
-            border: 2px solid white;
-            transition: var(--transition-smooth);
-        }
+    .quote-panel {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 18px;
+    }
 
-        .fav-hub-btn.active-mode .fav-badge {
-            background: white;
-            color: #e11d48;
-        }
+    .quote-pill {
+      min-width: 290px;
+      height: 62px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.28);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--text);
+      font-size: 1.1rem;
+      font-weight: 700;
+      box-shadow: 0 2px 0 rgba(0,0,0,0.02);
+    }
 
-        main {
-            max-width: 1220px;
-            margin: 24px auto;
-            padding: 0 18px 80px;
-        }
+    .quote-pill i {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
 
-        .page-head {
-            margin: 12px 0 18px;
-            text-align: left;
-        }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
 
-        .page-title {
-            margin: 0;
-            font-size: clamp(2rem, 4vw, 3.4rem);
-            line-height: 1.08;
-            letter-spacing: -0.06em;
-            font-weight: 800;
-            color: var(--text-main);
-            display: flex;
-            flex-wrap: wrap;
-            align-items: baseline;
-            gap: 0.4rem 0.8rem;
-        }
+    .card {
+      background: rgba(255,255,255,0.58);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 16px 18px 14px;
+      min-height: 170px;
+      box-shadow: 0 8px 20px rgba(15,23,42,0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
 
-        .page-title .en {
-            font-size: clamp(0.72rem, 1.7vw, 1.05rem);
-            letter-spacing: 0;
-            font-weight: 600;
-            color: var(--text-muted);
-            opacity: 0.9;
-            display: inline-block;
-            white-space: nowrap;
-        }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 28px rgba(15,23,42,0.06);
+    }
 
-        .section-label {
-            margin: 0 0 14px;
-            font-size: 0.92rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            opacity: 0.8;
-            font-weight: 700;
-        }
+    .card .quote-text {
+      font-family: 'Mukta', sans-serif;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      font-weight: 600;
+      color: var(--text);
+    }
 
-        .cats {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 28px;
-            justify-content: center;
-        }
+    .card .quote-meaning {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
 
-        .chip {
-            padding: 8px 18px;
-            border-radius: var(--radius-pill);
-            background: rgba(255, 255, 255, 0.7);
-            color: var(--text-muted);
-            font-weight: 500;
-            font-size: 14px;
-            cursor: pointer;
-            border: 1px solid var(--border-subtle);
-            transition: var(--transition-smooth);
-        }
+    .card .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      gap: 10px;
+    }
 
-        .chip:hover {
-            background: #fff;
-            color: var(--text-main);
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-blur);
-        }
+    .tag {
+      display: inline-flex;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.04);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
 
-        .chip.active {
-            background: var(--text-main);
-            color: white;
-            border-color: var(--text-main);
-            font-weight: 600;
-            box-shadow: var(--shadow-blur);
-        }
+    .card-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 16px;
-        }
+    .tiny-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.9);
+      color: var(--muted);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: all 0.2s ease;
+    }
 
-        .card {
-            background: var(--surface-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: 20px 20px 18px;
-            min-height: 180px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-shadow: var(--shadow-blur);
-            transition: var(--transition-smooth);
-            animation: cardAppear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-            position: relative;
-            overflow: hidden;
-        }
+    .tiny-btn:hover {
+      background: var(--text);
+      color: white;
+    }
 
-        @keyframes cardAppear {
-            from { opacity: 0; transform: translateY(20px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
+    .tiny-btn.fav-on {
+      background: rgba(255,40,86,0.08);
+      border-color: rgba(255,40,86,0.2);
+      color: #e11d48;
+    }
 
-        .card:hover {
-            background: var(--surface-hover);
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: var(--shadow-hover);
-            border-color: rgba(244, 63, 94, 0.2);
-        }
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%) translateY(18px);
+      background: rgba(29,43,57,0.96);
+      color: white;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 0.85rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s ease;
+      z-index: 50;
+    }
 
-        .quote {
-            font-size: 17px;
-            line-height: 1.7;
-            font-weight: 500;
-            color: var(--text-main);
-            position: relative;
-        }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
 
-        .quote-en {
-            margin-top: 6px;
-            color: var(--text-muted);
-            font-size: 13px;
-            line-height: 1.6;
-        }
+    @media (max-width: 860px) {
+      .topbar-inner {
+        height: auto;
+        padding: 16px 0;
+        flex-direction: column;
+        align-items: stretch;
+      }
 
-        .writer {
-            font-size: 13.5px;
-            font-weight: 600;
-            color: var(--text-muted);
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            opacity: 0.85;
-        }
+      .toolbar {
+        justify-content: space-between;
+      }
 
-        .writer::before {
-            content: "";
-            display: inline-block;
-            width: 12px;
-            height: 1.5px;
-            background-color: var(--text-muted);
-            opacity: 0.5;
-        }
+      .search-box {
+        width: min(100%, 420px);
+      }
 
-        .meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+      .brand-name {
+        font-size: 1.9rem;
+      }
 
-        .tag {
-            padding: 4px 12px;
-            border-radius: var(--radius-pill);
-            background: rgba(15, 23, 42, 0.04);
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
+      .hero {
+        min-height: 230px;
+      }
 
-        .actions {
-            display: flex;
-            gap: 6px;
-        }
+      .hero-title {
+        line-height: 0.96;
+      }
 
-        .icon-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: 1px solid rgba(15, 23, 42, 0.05);
-            display: grid;
-            place-items: center;
-            cursor: pointer;
-            background: rgba(255,255,255,0.8);
-            color: var(--text-muted);
-            font-size: 13px;
-            transition: var(--transition-smooth);
-        }
+      .hero-title .subtitle {
+        display: block;
+        width: 100%;
+        margin-top: 8px;
+      }
+    }
 
-        .icon-btn:hover {
-            background: var(--text-main);
-            color: #fff;
-            transform: scale(1.1);
-        }
+    @media (max-width: 560px) {
+      .toolbar {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
 
-        .fav-on {
-            background: #fff;
-            color: #e11d48;
-            border-color: rgba(225, 29, 72, 0.2);
-            box-shadow: var(--shadow-blur);
-            animation: heartPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+      .search-box {
+        width: 100%;
+      }
 
-        @keyframes heartPop {
-            0% { transform: scale(0.5); }
-            50% { transform: scale(1.3); }
-            100% { transform: scale(1); }
-        }
+      .btn {
+        flex: 1 1 auto;
+      }
 
-        .fav-on:hover {
-            background: #e11d48;
-            color: #fff;
-        }
+      .section-label {
+        margin-bottom: 18px;
+      }
 
-        .floating-heart {
-            position: absolute;
-            color: #ff4d6d;
-            font-size: 14px;
-            pointer-events: none;
-            z-index: 10;
-            animation: floatUp 0.8s ease-out forwards;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translate(0, 0) scale(1); opacity: 1; }
-            100% { transform: translate(var(--mx), var(--my)) scale(1.4); opacity: 0; }
-        }
-
-        .toast {
-            position: fixed;
-            left: 50%;
-            bottom: 32px;
-            transform: translateX(-50%) translateY(30px);
-            padding: 12px 24px;
-            border-radius: var(--radius-pill);
-            font-weight: 500;
-            color: #fff;
-            background: var(--text-main);
-            font-size: 14px;
-            opacity: 0;
-            pointer-events: none;
-            z-index: 9999;
-            box-shadow: var(--shadow-hover);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.2);
-        }
-
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        .load-more-wrap {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        #topBtn {
-            position: fixed;
-            bottom: 32px;
-            right: 32px;
-            width: 46px;
-            height: 46px;
-            border: none;
-            border-radius: 50%;
-            background: white;
-            color: var(--text-muted);
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: var(--shadow-blur);
-            display: grid;
-            place-items: center;
-            transition: var(--transition-smooth);
-            z-index: 90;
-            border: 1px solid var(--border-subtle);
-        }
-
-        #topBtn:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-            background: var(--text-main);
-            color: white;
-        }
-
-        .empty {
-            text-align: center;
-            padding: 48px;
-            border-radius: var(--radius-lg);
-            background: #fff;
-            color: var(--text-muted);
-            font-weight: 500;
-            font-size: 15px;
-            border: 1px dashed rgba(15, 23, 42, 0.1);
-            grid-column: 1 / -1;
-        }
-
-        :focus-visible { outline: 2px solid var(--border-focus); outline-offset: 2px; }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 12px;
-            }
-            .controls {
-                justify-content: space-between;
-                width: 100%;
-            }
-            .search-wrapper {
-                flex: 1;
-            }
-            .controls input[type=text] { width: 100%; }
-            .controls input[type=text]:focus { width: 100%; }
-            main { margin: 20px auto; }
-            .page-head {
-                text-align: center;
-            }
-            .page-title {
-                justify-content: center;
-                gap: 0.2rem 0.5rem;
-            }
-            .page-title .en {
-                display: block;
-                white-space: normal;
-                width: 100%;
-            }
-            .grid { gap: 12px; }
-        }
-    </style>
+      .quote-pill {
+        min-width: 220px;
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <div class="logo" id="logoHome">
-                <div class="logo-icon"><i class="fa-solid fa-feather"></i></div>
-                नेपाली Quotes
-            </div>
-            <div class="controls">
-                <div class="search-wrapper">
-                    <i class="fa-solid fa-magnifying-glass" id="searchIcon"></i>
-                    <input type="text" id="search" placeholder="खोज्नुहोस् (जस्तै: love, sad, जीवन)...">
-                </div>
-                <button id="randomBtn" title="Random Quote"><i class="fa-solid fa-shuffle"></i> Random</button>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand" aria-label="Nepali Quotes home">
+        <div class="brand-mark"><i class="fa-solid fa-leaf"></i></div>
+        <div class="brand-name">नेपाली <span class="eng">Quotes</span></div>
+      </div>
 
-                <button id="favHubBtn" class="fav-hub-btn" title="मनपर्ने Quotes">
-                    <i class="fa-solid fa-heart"></i>
-                    <span class="fav-badge" id="favCount">0</span>
-                </button>
+      <div class="toolbar">
+        <label class="search-box" aria-label="Search quotes">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input id="searchInput" type="text" placeholder="खोज्नुहोस् (जस्तै: love, sad, जीवन)..." />
+        </label>
 
-                <button id="clearFav" title="Clear Favorites"><i class="fa-regular fa-trash-can"></i> Clear</button>
-            </div>
-        </div>
-    </header>
+        <button id="randomBtn" class="btn btn-primary" type="button">
+          <i class="fa-solid fa-shuffle"></i>
+          Random
+        </button>
 
-    <main>
-        <div class="page-head">
-            <h1 class="page-title">नेपाली सुविचारहरू <span class="en">Nepali quotes, with English meanings</span></h1>
-        </div>
-        <h2 class="section-label">सुविचारहरू · Quotes</h2>
-        <div class="cats" id="categories"></div>
-        <div class="grid" id="grid"> </div>
-        <div class="load-more-wrap">
-            <button id="loadMoreBtn" class="chip"><i class="fa-solid fa-angles-down"></i> थप सुविचारहरू</button>
-        </div>
-        <div class="empty" id="empty" hidden></div>
-    </main>
+        <button id="favBtn" class="btn btn-icon" type="button" aria-label="Favorites">
+          <i class="fa-solid fa-heart"></i>
+          <span id="favBadge" class="badge">0</span>
+        </button>
 
-    <button id="topBtn" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
-    <div class="toast" id="toast">Copied!</div>
+        <button id="clearBtn" class="btn" type="button">
+          <i class="fa-solid fa-broom"></i>
+          Clear
+        </button>
+      </div>
+    </div>
+  </header>
 
-    <script>
-        const QUOTES = [
-            { t: "मन सबैथोक हो । जसरी तिमी सोच्छौँ, त्यस्तै बन्छौँ ।", en: "The mind is everything. What you think, you become.", w: "गौतम बुद्ध", c: "जीवन" },
-            { t: "स्वास्थ्य सबैभन्दा ठूलो उपहार हो, सन्तोष सबैभन्दा ठूलो धन हो ।", en: "Health is the greatest gift; contentment, the greatest wealth.", w: "गौतम बुद्ध", c: "जीवन" },
-            { t: "तीन चीज धेरै समयसम्म लुक्दैनन् — सूर्य, चन्द्रमा र सत्य ।", en: "Three things cannot stay hidden for long — the sun, the moon, and the truth.", w: "गौतम बुद्ध", c: "प्रेरणा" },
-            { t: "आफैलाई जित्नु अरूलाई जित्नुभन्दा ठूलो काम हो ।", en: "Conquering yourself is a greater victory than conquering others.", w: "गौतम बुद्ध", c: "प्रेरणा" },
-            { t: "सबैभन्दा अध्यारो रात अज्ञानता हो ।", en: "Ignorance is the darkest of all nights.", w: "गौतम बुद्ध", c: "प्रेरणा" },
-            { t: "हरेक कुरामा सोधबुझ गर र आफ्नै प्रकाश खोज ।", en: "Question everything, and seek your own light.", w: "गौतम बुद्ध", c: "जीवन" },
-            { t: "तिमी आफ्नो रिसको कारणले होइन, रिसैले दण्डित हुन्छौ ।", en: "You are not punished for your anger — you are punished by it.", w: "गौतम बुद्ध", c: "सम्बन्ध" },
-            { t: "रिस पाल्नु भनेको विष पिउनुजस्तै हो ।", en: "Holding onto anger is like drinking poison.", w: "गौतम बुद्ध", c: "सम्बन्ध" },
-            { t: "आफू मिटाई अरूलाई दिनु, जहाँ छ ।", en: "Give of yourself to others, wherever you are.", w: "लक्ष्मीप्रसाद देवकोटा", c: "जीवन" },
-            { t: "सपना त्यसैको पूरा हुन्छ, जसले सपना नछोड्ने हिम्मत गर्छ ।", en: "Dreams come true for those who have the courage to hold on to them.", w: "ए. पी. जे. अब्दुल कलाम", c: "प्रेरणा" },
-            { t: "जीवन छोटो छ, मुस्कान धेरै ।", en: "Life is short; smile more.", w: "अज्ञात", c: "जीवन" },
-            { t: "हार्ने डरले कहिल्यै जित्न सकिँदैन ।", en: "The fear of losing will never let you win.", w: "अज्ञात", c: "प्रेरणा" },
-            { t: "सफलता त्यसैको हुन्छ, जसले कठिनाइलाई अवसर बनाउँछ ।", en: "Success belongs to those who turn hardship into opportunity.", w: "अज्ञात", c: "सफलता" },
-            { t: "मौनता पनि कहिलेकाहीँ उत्तर हुन्छ ।", en: "Silence is sometimes the answer.", w: "अज्ञात", c: "जीवन" },
-            { t: "समय खराब हुँदैन, सोच खराब हुन्छ ।", en: "Time is never the problem — our thinking is.", w: "अज्ञात", c: "जीवन" },
-            { t: "प्रेममा कहिलेकाहीँ शब्दभन्दा मौनताले बढी बोल्छ ।", en: "In love, silence sometimes speaks louder than words.", w: "अज्ञात", c: "प्रेम" },
-            { t: "सच्चा प्रेम कहिल्यै मर्दैन — यो समयसँगै अझ गहिरो हुँदै जान्छ ।", en: "True love never dies — it only grows deeper with time.", w: "अज्ञात", c: "प्रेम" },
-            { t: "कठिन बाटोले नै सुन्दर गन्तव्यसम्म पुर्‍याउँछ ।", en: "The hard road is the one that leads to a beautiful destination.", w: "अज्ञात", c: "प्रेरणा" },
-            { t: "आँसु तब झर्छ, जब मनले पीडा सहन छोड्छ ।", en: "Tears fall when the heart can no longer carry the pain.", w: "अज्ञात", c: "दुख" },
-            { t: "सम्बन्ध विश्वासमा टिक्छ, शंकामा होइन ।", en: "Relationships survive on trust, not suspicion.", w: "अज्ञात", c: "सम्बन्ध" },
-            { t: "परिश्रम नै सफलताको एकमात्र साँचो बाटो हो ।", en: "Hard work is the true path to success.", w: "अज्ञात", c: "सफलता" },
-            { t: "जीवनको प्रत्येक पाइलाले हामीलाई नयाँ अनुभव र सिकाइ दिन्छ ।", en: "Every step in life gives us a new experience and lesson.", w: "अज्ञात", c: "जीवन" },
-            { t: "हार नमान — तिम्रो संघर्ष नै भोलिको सफलताको मुख्य जग बन्नेछ ।", en: "Do not give up — your struggle will become the foundation of tomorrow's success.", w: "अज्ञात", c: "सफलता" },
-            { t: "साँचो प्रेम त्यो हो, जुन टाढा हुँदा पनि मनभित्रै धड्किरहन्छ ।", en: "True love is the kind that keeps beating inside even from afar.", w: "अज्ञात", c: "प्रेम" },
-            { t: "दुख र आँसुले नै मानिसलाई भित्रभित्रै बलियो बनाउँछन् ।", en: "Pain and tears are what make a person stronger from within.", w: "अज्ञात", c: "दुख" },
-            { t: "सफलताका लागि पहिले आफैमाथि पूर्ण विश्वास र अथक मेहनत चाहिन्छ ।", en: "To succeed, first you need complete faith in yourself and relentless effort.", w: "अज्ञात", c: "सफलता" },
-            { t: "सम्बन्ध बनाउन सजिलो छ, तर आदर र विश्वासका साथ जीवनभर निभाउन गाह्रो छ ।", en: "It is easy to build a relationship, but hard to keep it alive with respect and trust.", w: "अज्ञात", c: "सम्बन्ध" }
-        ];
+  <main class="page">
+    <section class="hero">
+      <h1 class="hero-title">
+        नेपालीसुविचारहरु
+        <span class="subtitle">Nepali quotes, with English meanings</span>
+      </h1>
+      <div class="section-label">सुविचारहरू · QUOTES</div>
+    </section>
 
-        const BATCH = 12;
+    <div class="quote-panel">
+      <div class="quote-pill">
+        <i class="fa-solid fa-arrow-down"></i>
+        <span>यथ सुविचारहरु</span>
+      </div>
+    </div>
 
-        const languageMap = {
-            love: 'प्रेम', maya: 'प्रेम', pirati: 'प्रेम', माया: 'प्रेम', प्रेम: 'प्रेम',
-            sad: 'दुख', pida: 'दुख', cry: 'दुख', दुख: 'दुख', पीडा: 'दुख',
-            life: 'जीवन', jiban: 'जीवन', human: 'जीवन', जीवन: 'जीवन',
-            success: 'सफलता', win: 'सफलता', target: 'सफलता', सफलता: 'सफलता',
-            motivation: 'प्रेरणा', inspire: 'प्रेरणा', hope: 'प्रेरणा', प्रेरणा: 'प्रेरणा',
-            relation: 'सम्बन्ध', friend: 'सम्बन्ध', family: 'सम्बन्ध', सम्बन्ध: 'सम्बन्ध'
-        };
+    <section id="quotes" class="cards" aria-live="polite"></section>
+  </main>
 
-        const state = {
-            activeCat: 'सबै',
-            query: '',
-            showFavOnly: false,
-            visible: 12,
-            favorites: new Set(JSON.parse(localStorage.getItem('favorites') || '[]'))
-        };
+  <div id="toast" class="toast" role="status" aria-live="polite">Copied</div>
 
-        const grid = document.getElementById('grid');
-        const categoriesEl = document.getElementById('categories');
-        const emptyEl = document.getElementById('empty');
-        const searchInput = document.getElementById('search');
-        const searchIcon = document.getElementById('searchIcon');
-        const toastEl = document.getElementById('toast');
-        const favCountEl = document.getElementById('favCount');
-        const favHubBtn = document.getElementById('favHubBtn');
-        const loadMoreBtn = document.getElementById('loadMoreBtn');
+  <script>
+    const quotes = [
+      { text: 'मन सबैथोक हो । जसरी तिमी सोच्छौ, त्यस्तै बन्छौ ।', meaning: 'The mind is everything. What you think, you become.', category: 'Life', author: 'गौतम बुद्ध' },
+      { text: 'स्वास्थ्य सबैभन्दा ठूलो उपहार हो, सन्तोष सबैभन्दा ठूलो धन हो ।', meaning: 'Health is the greatest gift; contentment is the greatest wealth.', category: 'Life', author: 'गौतम बुद्ध' },
+      { text: 'तीन चीज धेरै समयसम्म लुक्दैनन् — सूर्य, चन्द्रमा र सत्य ।', meaning: 'Three things cannot remain hidden for long — the sun, the moon, and the truth.', category: 'Motivation', author: 'गौतम बुद्ध' },
+      { text: 'आफैलाई जित्नु अरूलाई जित्नुभन्दा ठूलो काम हो ।', meaning: 'Conquering yourself is a greater victory than conquering others.', category: 'Motivation', author: 'गौतम बुद्ध' },
+      { text: 'सपना त्यसैको पूरा हुन्छ, जसले सपना नछोड्ने हिम्मत गर्छ ।', meaning: 'Dreams come true for those who have the courage to keep dreaming.', category: 'Motivation', author: 'ए. पी. जे. अब्दुल कलाम' },
+      { text: 'जीवन छोटो छ, मुस्कान धेरै ।', meaning: 'Life is short, smile more.', category: 'Life', author: 'अज्ञात' },
+      { text: 'समय खराब हुँदैन, सोच खराब हुन्छ ।', meaning: 'Time is not bad; our thinking is.', category: 'Life', author: 'अज्ञात' },
+      { text: 'प्रेममा कहिलेकाहीँ शब्दभन्दा मौनताले बढी बोल्छ ।', meaning: 'In love, silence often speaks louder than words.', category: 'Love', author: 'अज्ञात' },
+      { text: 'सच्चा प्रेम कहिल्यै मर्दैन — यो समयसँगै अझ गहिरो हुँदै जान्छ ।', meaning: 'True love never dies; it only grows deeper with time.', category: 'Love', author: 'अज्ञात' },
+      { text: 'परिश्रम नै सफलताको एकमात्र साँचो बाटो हो ।', meaning: 'Hard work is the true path to success.', category: 'Success', author: 'अज्ञात' },
+      { text: 'हार्ने डरले कहिल्यै जित्न सकिँदैन ।', meaning: 'The fear of losing can never help you win.', category: 'Success', author: 'अज्ञात' },
+      { text: 'सम्बन्ध विश्वासमा टिक्छ, शंकामा होइन ।', meaning: 'Relationships survive on trust, not doubt.', category: 'Relationships', author: 'अज्ञात' }
+    ];
 
-        function updateFavBadge() {
-            favCountEl.textContent = state.favorites.size;
-        }
+    const state = {
+      query: '',
+      favorites: new Set(JSON.parse(localStorage.getItem('npQuotesFavorites') || '[]'))
+    };
 
-        function buildCategories() {
-            const cats = new Set(QUOTES.map(q => q.c));
-            const arr = ['सबै', ...cats];
-            categoriesEl.innerHTML = '';
-            arr.forEach(c => {
-                const btn = document.createElement('button');
-                btn.className = 'chip' + (c === state.activeCat ? ' active' : '');
-                btn.textContent = c;
-                btn.onclick = () => {
-                    state.activeCat = c;
-                    state.showFavOnly = false;
-                    favHubBtn.classList.remove('active-mode');
-                    document.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
-                    btn.classList.add('active');
-                    renderAll();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                };
-                categoriesEl.appendChild(btn);
-            });
-        }
+    const quotesEl = document.getElementById('quotes');
+    const searchInput = document.getElementById('searchInput');
+    const favBadge = document.getElementById('favBadge');
+    const toast = document.getElementById('toast');
 
-        function updateSearchIcon(query) {
-            searchIcon.className = 'fa-solid';
-            const text = query.toLowerCase();
-            if (!text) {
-                searchIcon.classList.add('fa-magnifying-glass');
-                return;
-            }
+    function updateFavoritesBadge() {
+      favBadge.textContent = String(state.favorites.size);
+    }
 
-            if (text.includes('love') || text.includes('maya') || text.includes('प्रेम') || text.includes('माया')) {
-                searchIcon.classList.add('fa-heart', 'active-icon');
-            } else if (text.includes('sad') || text.includes('दुख') || text.includes('pida') || text.includes('पीडा')) {
-                searchIcon.classList.add('fa-face-sad-tear', 'sad-icon');
-            } else if (text.includes('success') || text.includes('सफलता') || text.includes('win')) {
-                searchIcon.classList.add('fa-trophy', 'success-icon');
-            } else if (text.includes('life') || text.includes('जीवन') || text.includes('jiban')) {
-                searchIcon.classList.add('fa-seedling', 'life-icon');
-            } else if (text.includes('motivation') || text.includes('प्रेरणा') || text.includes('inspire')) {
-                searchIcon.classList.add('fa-bolt', 'success-icon');
-            } else if (text.includes('relation') || text.includes('सम्बन्ध') || text.includes('friend')) {
-                searchIcon.classList.add('fa-user-group', 'life-icon');
-            } else {
-                searchIcon.classList.add('fa-magnifying-glass');
-            }
-        }
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toast.classList.remove('show'), 1800);
+    }
 
-        function filtered() {
-            const ql = state.query.toLowerCase();
-            return QUOTES.filter(q => {
-                const inCat = state.activeCat === 'सबै' || q.c === state.activeCat;
-                const matchesText = q.t.toLowerCase().includes(ql) || q.en.toLowerCase().includes(ql) || q.w.toLowerCase().includes(ql);
+    function filteredQuotes() {
+      const q = state.query.trim().toLowerCase();
+      if (!q) return quotes;
 
-                let matchesBilingual = false;
-                for (const [key, categoryValue] of Object.entries(languageMap)) {
-                    if (ql.includes(key) && q.c === categoryValue) {
-                        matchesBilingual = true;
-                        break;
-                    }
-                }
+      return quotes.filter((item) => {
+        return (
+          item.text.toLowerCase().includes(q) ||
+          item.meaning.toLowerCase().includes(q) ||
+          item.author.toLowerCase().includes(q) ||
+          item.category.toLowerCase().includes(q)
+        );
+      });
+    }
 
-                const matchesFav = !state.showFavOnly || state.favorites.has(q.t);
-                return inCat && (matchesText || matchesBilingual) && matchesFav;
-            });
-        }
+    function renderQuotes() {
+      const list = filteredQuotes();
+      quotesEl.innerHTML = '';
 
-        function createHearts(e, container) {
-            const rect = container.getBoundingClientRect();
-            const startX = e.clientX - rect.left;
-            const startY = e.clientY - rect.top;
+      if (!list.length) {
+        quotesEl.innerHTML = '<article class="card"><div class="quote-text">No quotes found.</div><div class="quote-meaning">Try a different keyword like love, sad, success, or जीवन.</div></article>';
+        return;
+      }
 
-            for (let i = 0; i < 6; i++) {
-                const heart = document.createElement('i');
-                heart.className = 'fa-solid fa-heart floating-heart';
-                heart.style.left = startX + 'px';
-                heart.style.top = startY + 'px';
+      list.forEach((item) => {
+        const card = document.createElement('article');
+        card.className = 'card';
 
-                const mx = (Math.random() - 0.5) * 100;
-                const my = -(Math.random() * 80 + 40);
-                heart.style.setProperty('--mx', mx + 'px');
-                heart.style.setProperty('--my', my + 'px');
+        const text = document.createElement('div');
+        text.className = 'quote-text';
+        text.textContent = item.text;
 
-                const size = Math.random() * 12 + 10;
-                heart.style.fontSize = size + 'px';
-                heart.style.animationDuration = (Math.random() * 0.4 + 0.6) + 's';
+        const meaning = document.createElement('div');
+        meaning.className = 'quote-meaning';
+        meaning.textContent = item.meaning;
 
-                container.appendChild(heart);
-                setTimeout(() => heart.remove(), 1000);
-            }
-        }
+        const meta = document.createElement('div');
+        meta.className = 'meta';
 
-        function makeCard(q, idx) {
-            const card = document.createElement('article');
-            card.className = 'card';
-            card.style.animationDelay = (Math.min(idx * 12, 250)) + 'ms';
+        const tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.textContent = item.category;
 
-            const ne = document.createElement('h3');
-            ne.className = 'quote';
-            ne.lang = 'ne';
-            ne.textContent = q.t;
+        const actions = document.createElement('div');
+        actions.className = 'card-actions';
 
-            const en = document.createElement('p');
-            en.className = 'quote-en';
-            en.lang = 'en';
-            en.textContent = q.en;
+        const fav = document.createElement('button');
+        fav.type = 'button';
+        fav.className = 'tiny-btn' + (state.favorites.has(item.text) ? ' fav-on' : '');
+        fav.innerHTML = '<i class="fa-solid fa-heart"></i>';
+        fav.title = 'Add to favorites';
+        fav.addEventListener('click', () => {
+          if (state.favorites.has(item.text)) {
+            state.favorites.delete(item.text);
+            showToast('Removed from favorites');
+          } else {
+            state.favorites.add(item.text);
+            showToast('Added to favorites');
+          }
 
-            const writer = document.createElement('p');
-            writer.className = 'writer';
-            writer.textContent = q.w;
-
-            const meta = document.createElement('div');
-            meta.className = 'meta';
-
-            const tag = document.createElement('div');
-            tag.className = 'tag';
-            tag.textContent = q.c;
-
-            const actions = document.createElement('div');
-            actions.className = 'actions';
-
-            const favBtn = document.createElement('button');
-            favBtn.className = 'icon-btn';
-            favBtn.setAttribute('aria-label', 'मनपर्ने सूची');
-            const syncFav = () => {
-                const on = state.favorites.has(q.t);
-                favBtn.innerHTML = on ? '<i class="fa-solid fa-heart"></i>' : '<i class="fa-regular fa-heart"></i>';
-                favBtn.classList.toggle('fav-on', on);
-                favBtn.setAttribute('aria-pressed', String(on));
-            };
-            syncFav();
-            favBtn.onclick = e => {
-                e.stopPropagation();
-                if (state.favorites.has(q.t)) {
-                    state.favorites.delete(q.t);
-                    showToast('मनपर्ने सूचीबाट हटाइयो');
-                } else {
-                    state.favorites.add(q.t);
-                    showToast('मनपर्ने सूचीमा थपियो ❤️');
-                    createHearts(e, card);
-                }
-                localStorage.setItem('favorites', JSON.stringify([...state.favorites]));
-                syncFav();
-                updateFavBadge();
-                if (state.showFavOnly) renderAll();
-            };
-
-            const copyBtn = document.createElement('button');
-            copyBtn.className = 'icon-btn';
-            copyBtn.setAttribute('aria-label', 'प्रतिलिपि बनाउनुहोस्');
-            copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i>';
-            copyBtn.onclick = () => {
-                navigator.clipboard.writeText('"' + q.t + '" — ' + q.w).then(() => {
-                    showToast('क्लिपबोर्डमा प्रतिलिपि गरियो!');
-                    copyBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
-                    setTimeout(() => {
-                        copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i>';
-                    }, 1500);
-                });
-            };
-
-            actions.appendChild(favBtn);
-            actions.appendChild(copyBtn);
-            meta.appendChild(tag);
-            meta.appendChild(actions);
-
-            card.appendChild(ne);
-            card.appendChild(en);
-            card.appendChild(writer);
-            card.appendChild(meta);
-            return card;
-        }
-
-        function updateLoadMore(total) {
-            loadMoreBtn.hidden = !(total > state.visible);
-        }
-
-        function renderAll() {
-            state.visible = BATCH;
-            const list = filtered();
-            grid.innerHTML = '';
-
-            if (list.length === 0) {
-                emptyEl.hidden = false;
-                emptyEl.innerHTML = state.showFavOnly
-                    ? '<i class="fa-solid fa-heart-crack"></i>तपाईंको मनपर्ने सूची खाली छ।'
-                    : '<i class="fa-solid fa-magnifying-glass"></i>माफ गर्नुहोस्—कुनै पनि परिणाम फेला परेन।';
-                loadMoreBtn.hidden = true;
-            } else {
-                emptyEl.hidden = true;
-                const frag = document.createDocumentFragment();
-                list.slice(0, state.visible).forEach((q, i) => frag.appendChild(makeCard(q, i)));
-                grid.appendChild(frag);
-                updateLoadMore(list.length);
-            }
-        }
-
-        function loadMore() {
-            const list = filtered();
-            const next = list.slice(state.visible, state.visible + BATCH);
-            if (!next.length) {
-                loadMoreBtn.hidden = true;
-                return;
-            }
-
-            const frag = document.createDocumentFragment();
-            next.forEach((q, i) => frag.appendChild(makeCard(q, state.visible + i)));
-            grid.appendChild(frag);
-            state.visible += next.length;
-            updateLoadMore(list.length);
-        }
-
-        function showToast(msg) {
-            toastEl.textContent = msg;
-            toastEl.classList.add('show');
-            clearTimeout(toastEl._timer);
-            toastEl._timer = setTimeout(() => toastEl.classList.remove('show'), 2000);
-        }
-
-        favHubBtn.addEventListener('click', () => {
-            state.showFavOnly = !state.showFavOnly;
-            if (state.showFavOnly) {
-                favHubBtn.classList.add('active-mode');
-                showToast('मनपर्ने Quotes मात्र देखाइँदैछ');
-                document.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
-            } else {
-                favHubBtn.classList.remove('active-mode');
-                showToast('सबै Quotes हरू देखाइँदैछ');
-                buildCategories();
-            }
-            renderAll();
+          localStorage.setItem('npQuotesFavorites', JSON.stringify([...state.favorites]));
+          updateFavoritesBadge();
+          renderQuotes();
         });
 
-        document.getElementById('logoHome').addEventListener('click', () => {
-            state.activeCat = 'सबै';
-            state.query = '';
-            state.showFavOnly = false;
-            searchInput.value = '';
-            updateSearchIcon('');
-            favHubBtn.classList.remove('active-mode');
-            buildCategories();
-            renderAll();
+        const copy = document.createElement('button');
+        copy.type = 'button';
+        copy.className = 'tiny-btn';
+        copy.innerHTML = '<i class="fa-regular fa-copy"></i>';
+        copy.title = 'Copy quote';
+        copy.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(`${item.text} — ${item.author}`);
+            showToast('Copied to clipboard');
+          } catch {
+            showToast('Copy failed');
+          }
         });
 
-        searchInput.addEventListener('input', e => {
-            state.query = e.target.value.trim();
-            updateSearchIcon(state.query);
-            renderAll();
-        });
+        actions.append(fav, copy);
+        meta.append(tag, actions);
 
-        loadMoreBtn.addEventListener('click', loadMore);
+        card.append(text, meaning, meta);
+        quotesEl.appendChild(card);
+      });
+    }
 
-        document.getElementById('randomBtn').addEventListener('click', () => {
-            const idx = Math.floor(Math.random() * QUOTES.length);\n            showToast('"' + QUOTES[idx].t + '" — ' + QUOTES[idx].w);
-        });
+    document.getElementById('searchInput').addEventListener('input', (event) => {
+      state.query = event.target.value;
+      renderQuotes();
+    });
 
-        document.getElementById('clearFav').addEventListener('click', () => {
-            if (state.favorites.size === 0) {
-                showToast('सूची पहिले नै खाली छ');
-                return;
-            }
-            if (confirm('सबै मनपर्ने Quotes हरू हटाउन चाहनुहुन्छ?')) {
-                state.favorites.clear();
-                localStorage.setItem('favorites', '[]');
-                state.showFavOnly = false;
-                favHubBtn.classList.remove('active-mode');
-                updateFavBadge();
-                buildCategories();
-                renderAll();
-                showToast('सूची खाली गरियो');
-            }
-        });
+    document.getElementById('randomBtn').addEventListener('click', () => {
+      const random = quotes[Math.floor(Math.random() * quotes.length)];
+      state.query = random.text;
+      searchInput.value = random.text;
+      renderQuotes();
+      showToast('Random quote selected');
+    });
 
-        document.getElementById('topBtn').addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+    document.getElementById('favBtn').addEventListener('click', () => {
+      const favorites = [...state.favorites];
+      if (!favorites.length) {
+        showToast('No favorites yet');
+        return;
+      }
 
-        buildCategories();
-        updateFavBadge();
-        renderAll();
-    </script>
+      const items = quotes.filter((quote) => state.favorites.has(quote.text));
+      state.query = '';
+      searchInput.value = '';
+      renderQuotes();
+      showToast(`${items.length} favorite quotes shown`);
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      state.favorites.clear();
+      localStorage.setItem('npQuotesFavorites', '[]');
+      updateFavoritesBadge();
+      renderQuotes();
+      showToast('Favorites cleared');
+    });
+
+    updateFavoritesBadge();
+    renderQuotes();
+  </script>
 </body>
 </html>
